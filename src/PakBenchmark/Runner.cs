@@ -13,6 +13,7 @@ public static class Runner
         {
             new AssetReplacementRule(),
             new LaunchUrlRule(),
+            new HiddenModRule(),
         });
 
         var scorecard = new Grader(scanner).Run(corpusDir, out var results);
