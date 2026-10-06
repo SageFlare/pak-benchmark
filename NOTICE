@@ -1,0 +1,5 @@
+pak-benchmark — grades pak-scanner against the pak-corpus dataset
+
+Links pak-scanner, which links UnchainedLauncher.UnrealModScanner (GPLv3) and
+CUE4Parse (MIT). Because it transitively links GPLv3 code, pak-benchmark is
+licensed under the GNU General Public License v3.0. See LICENSE.

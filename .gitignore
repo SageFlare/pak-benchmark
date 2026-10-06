@@ -1,0 +1,23 @@
+# Design specs & plans — local only
+docs/specs/
+docs/superpowers/
+.superpowers/
+
+# Benchmark outputs
+out/
+scorecard.json
+report.md
+
+# .NET build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+.vs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
