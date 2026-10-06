@@ -27,7 +27,7 @@ public class ScorecardTests
     {
         var sc = new Scorecard(new[]
         {
-            R("a", "benign", Verdict.Benign, Verdict.Malicious),
+            R("a", "benign", Verdict.Benign, Verdict.FlaggedActive),
             R("b", "benign", Verdict.Benign, Verdict.Benign),
         });
         Assert.Equal(0.5, sc.FalsePositiveRate);
@@ -37,18 +37,18 @@ public class ScorecardTests
     [Fact]
     public void Malicious_caught_gives_recall_one_missed_gives_zero()
     {
-        var caught = new Scorecard(new[] { R("m", "asset_replacement", Verdict.Malicious, Verdict.Malicious) });
+        var caught = new Scorecard(new[] { R("m", "asset_replacement", Verdict.FlaggedActive, Verdict.FlaggedActive) });
         Assert.Equal(1.0, caught.Recall);
 
-        var missed = new Scorecard(new[] { R("m", "asset_replacement", Verdict.Malicious, Verdict.Benign) });
+        var missed = new Scorecard(new[] { R("m", "asset_replacement", Verdict.FlaggedActive, Verdict.Benign) });
         Assert.Equal(0.0, missed.Recall);
     }
 
     [Fact]
     public void ParseState_is_case_insensitive_and_rejects_unknown()
     {
-        Assert.Equal(Verdict.Malicious, ManifestEntry.ParseState("malicious"));
-        Assert.Equal(Verdict.Attempted, ManifestEntry.ParseState("Attempted"));
+        Assert.Equal(Verdict.FlaggedActive, ManifestEntry.ParseState("flagged-active"));
+        Assert.Equal(Verdict.FlaggedLatent, ManifestEntry.ParseState("Flagged-Latent"));
         Assert.Throws<ArgumentException>(() => ManifestEntry.ParseState("nope"));
     }
 }

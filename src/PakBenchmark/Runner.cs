@@ -37,7 +37,7 @@ public static class Runner
         sb.AppendLine($"- Samples: {sc.Total}");
         sb.AppendLine($"- Accuracy: {sc.Accuracy:P0}");
         sb.AppendLine($"- False-positive rate: {sc.FalsePositiveRate:P0}");
-        sb.AppendLine($"- Recall: {(sc.Recall is { } r ? r.ToString("P0") : "N/A (no malicious samples in corpus)")}");
+        sb.AppendLine($"- Recall: {(sc.Recall is { } r ? r.ToString("P0") : "N/A (no flagged-active samples in corpus)")}");
         sb.AppendLine($"- Gate: **{(pass ? "PASS" : "FAIL")}** — {reason}");
         sb.AppendLine();
         sb.AppendLine("## Per-vector");

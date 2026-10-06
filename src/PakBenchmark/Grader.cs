@@ -7,7 +7,7 @@ namespace PakBenchmark;
 
 /// <summary>
 /// Runs a scanner over a labeled corpus and scores the results. The gate encodes the
-/// push/no-push decision: no benign sample may score non-benign, and no malicious sample may
+/// push/no-push decision: no benign sample may score non-benign, and no flagged-active sample may
 /// score benign.
 /// </summary>
 public sealed class Grader
@@ -45,7 +45,7 @@ public sealed class Grader
 
     /// <summary>
     /// The push/no-push gate. Fails if any benign sample scored non-benign (false positive),
-    /// or any malicious sample scored benign (missed detection).
+    /// or any flagged-active sample scored benign (missed detection).
     /// </summary>
     public static (bool pass, string reason) Gate(Scorecard sc)
     {
@@ -54,9 +54,9 @@ public sealed class Grader
             return (false, $"{falsePositives.Count} benign sample(s) scored non-benign: "
                            + string.Join(", ", falsePositives.Select(r => $"{r.Name}->{r.Actual}")));
 
-        var missed = sc.Results.Where(r => r.Expected == Verdict.Malicious && r.Actual == Verdict.Benign).ToList();
+        var missed = sc.Results.Where(r => r.Expected == Verdict.FlaggedActive && r.Actual == Verdict.Benign).ToList();
         if (missed.Count > 0)
-            return (false, $"{missed.Count} malicious sample(s) scored benign: "
+            return (false, $"{missed.Count} flagged-active sample(s) scored benign: "
                            + string.Join(", ", missed.Select(r => r.Name)));
 
         return (true, "all gates passed");

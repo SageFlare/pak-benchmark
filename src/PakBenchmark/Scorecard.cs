@@ -8,7 +8,7 @@ public record SampleResult(string Name, string Vector, Verdict Expected, Verdict
 
 /// <summary>
 /// Three-state scorecard over a set of <see cref="SampleResult"/>. Recall is null when the
-/// corpus contains no malicious samples (so a benign-only run reports false positives without a
+/// corpus contains no flagged-active samples (so a benign-only run reports false positives without a
 /// misleading 0 recall).
 /// </summary>
 public sealed class Scorecard
@@ -24,10 +24,10 @@ public sealed class Scorecard
             ? 0.0
             : (double)benign.Count(r => r.Actual != Verdict.Benign) / benign.Count;
 
-        var malicious = results.Where(r => r.Expected == Verdict.Malicious).ToList();
+        var malicious = results.Where(r => r.Expected == Verdict.FlaggedActive).ToList();
         Recall = malicious.Count == 0
             ? null
-            : (double)malicious.Count(r => r.Actual == Verdict.Malicious) / malicious.Count;
+            : (double)malicious.Count(r => r.Actual == Verdict.FlaggedActive) / malicious.Count;
 
         PerVector = results
             .GroupBy(r => r.Vector)

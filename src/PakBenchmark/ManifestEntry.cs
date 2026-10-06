@@ -15,8 +15,8 @@ public record ManifestEntry(
     public static Verdict ParseState(string state) => state?.Trim().ToLowerInvariant() switch
     {
         "benign" => Verdict.Benign,
-        "attempted" => Verdict.Attempted,
-        "malicious" => Verdict.Malicious,
+        "flagged-latent" => Verdict.FlaggedLatent,
+        "flagged-active" => Verdict.FlaggedActive,
         _ => throw new ArgumentException($"unknown expected_state: '{state}'"),
     };
 }

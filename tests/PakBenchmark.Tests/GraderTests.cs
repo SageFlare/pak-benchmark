@@ -49,7 +49,7 @@ public class GraderTests
     public void Mislabeling_a_benign_as_malicious_fails_gate_via_missed_recall()
     {
         // The pak really scans Benign; labeling it malicious makes it a missed detection.
-        var dir = MakeCorpus(("benign_map", "malicious"));
+        var dir = MakeCorpus(("benign_map", "flagged-active"));
         try
         {
             var sc = NewGrader().Run(dir, out _);
