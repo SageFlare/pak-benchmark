@@ -14,6 +14,7 @@ public static class Runner
             new AssetReplacementRule(),
             new LaunchUrlRule(),
             new HiddenModRule(),
+            new WebWidgetRule(),
         });
 
         var scorecard = new Grader(scanner).Run(corpusDir, out var results);
