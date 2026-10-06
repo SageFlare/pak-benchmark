@@ -45,6 +45,19 @@ public class ScorecardTests
     }
 
     [Fact]
+    public void Gate_fails_when_flagged_active_is_underscored_to_latent()
+    {
+        // I7 regression: scoring a truly-active pak as merely flagged-latent is a real miss.
+        var sc = new Scorecard(new[]
+        {
+            R("m", "launch_url", Verdict.FlaggedActive, Verdict.FlaggedLatent),
+        });
+        var (pass, reason) = Grader.Gate(sc);
+        Assert.False(pass);
+        Assert.Contains("m->FlaggedLatent", reason);
+    }
+
+    [Fact]
     public void ParseState_is_case_insensitive_and_rejects_unknown()
     {
         Assert.Equal(Verdict.FlaggedActive, ManifestEntry.ParseState("flagged-active"));

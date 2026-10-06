@@ -44,8 +44,11 @@ public sealed class Grader
     }
 
     /// <summary>
-    /// The push/no-push gate. Fails if any benign sample scored non-benign (false positive),
-    /// or any flagged-active sample scored benign (missed detection).
+    /// The push/no-push gate. Fails if:
+    /// - any benign sample scored non-benign (false positive), or
+    /// - any flagged-active sample scored anything other than flagged-active (a real miss of
+    ///   execution-reachability — scoring it benign OR flagged-latent both understate a pak that
+    ///   actually runs on load).
     /// </summary>
     public static (bool pass, string reason) Gate(Scorecard sc)
     {
@@ -54,10 +57,10 @@ public sealed class Grader
             return (false, $"{falsePositives.Count} benign sample(s) scored non-benign: "
                            + string.Join(", ", falsePositives.Select(r => $"{r.Name}->{r.Actual}")));
 
-        var missed = sc.Results.Where(r => r.Expected == Verdict.FlaggedActive && r.Actual == Verdict.Benign).ToList();
+        var missed = sc.Results.Where(r => r.Expected == Verdict.FlaggedActive && r.Actual != Verdict.FlaggedActive).ToList();
         if (missed.Count > 0)
-            return (false, $"{missed.Count} flagged-active sample(s) scored benign: "
-                           + string.Join(", ", missed.Select(r => r.Name)));
+            return (false, $"{missed.Count} flagged-active sample(s) under-scored: "
+                           + string.Join(", ", missed.Select(r => $"{r.Name}->{r.Actual}")));
 
         return (true, "all gates passed");
     }
