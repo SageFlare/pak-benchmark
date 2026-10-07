@@ -3,11 +3,17 @@
 Grades [pak-scanner](https://github.com/SageFlare/pak-scanner) against the labeled
 [pak-corpus](https://github.com/SageFlare/pak-corpus): runs the scanner over every sample,
 compares each verdict to the manifest's ground truth, and reports a three-state scorecard
-(benign / attempted / malicious) — false-positive rate, recall, per-vector hit/miss — plus
-per-sample timing.
+(benign / flagged-latent / flagged-active) — false-positive rate, recall, per-vector hit/miss —
+plus per-sample timing.
 
 Part of a 3-repo system: pak-corpus (dataset) · pak-scanner (detector) · **pak-benchmark**
 (this, the grader).
+
+## Latest results
+
+See **[results/report.md](results/report.md)** for the current scorecard (also
+[results/scorecard.json](results/scorecard.json) machine-readable). Regenerate with the run
+command below; the committed copy reflects the last local run.
 
 ## What it answers
 

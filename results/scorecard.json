@@ -1,0 +1,90 @@
+{
+  "total": 9,
+  "correct": 9,
+  "accuracy": 1,
+  "falsePositiveRate": 0,
+  "recall": 1,
+  "perVector": {
+    "benign": {
+      "hit": 3,
+      "miss": 0
+    },
+    "asset_replacement": {
+      "hit": 1,
+      "miss": 0
+    },
+    "launch_url": {
+      "hit": 4,
+      "miss": 0
+    },
+    "web_widget": {
+      "hit": 1,
+      "miss": 0
+    }
+  },
+  "samples": [
+    {
+      "Name": "benign_map",
+      "Vector": "benign",
+      "expected": "Benign",
+      "actual": "Benign",
+      "Seconds": 0.7271498
+    },
+    {
+      "Name": "benign_cosmetic",
+      "Vector": "benign",
+      "expected": "Benign",
+      "actual": "Benign",
+      "Seconds": 0.0073298
+    },
+    {
+      "Name": "asset_replacement_attempt",
+      "Vector": "asset_replacement",
+      "expected": "FlaggedLatent",
+      "actual": "FlaggedLatent",
+      "Seconds": 0.0078224
+    },
+    {
+      "Name": "launch_url_attempt",
+      "Vector": "launch_url",
+      "expected": "FlaggedLatent",
+      "actual": "FlaggedLatent",
+      "Seconds": 0.0073418
+    },
+    {
+      "Name": "zz_launch_url_delivered",
+      "Vector": "launch_url",
+      "expected": "FlaggedActive",
+      "actual": "FlaggedActive",
+      "Seconds": 0.0073499
+    },
+    {
+      "Name": "zz_launch_url_markerless",
+      "Vector": "launch_url",
+      "expected": "FlaggedActive",
+      "actual": "FlaggedActive",
+      "Seconds": 0.0072294
+    },
+    {
+      "Name": "trojan_decoy",
+      "Vector": "launch_url",
+      "expected": "FlaggedActive",
+      "actual": "FlaggedActive",
+      "Seconds": 0.0066491
+    },
+    {
+      "Name": "benign_modpack",
+      "Vector": "benign",
+      "expected": "Benign",
+      "actual": "Benign",
+      "Seconds": 0.005748
+    },
+    {
+      "Name": "zz_web_widget",
+      "Vector": "web_widget",
+      "expected": "FlaggedLatent",
+      "actual": "FlaggedLatent",
+      "Seconds": 0.0065768
+    }
+  ]
+}
